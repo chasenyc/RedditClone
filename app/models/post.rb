@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
     primary_key: :id
 
   def content_or_url
-    unless url || content
+    if url.empty? && content.empty?
       self.errors[:content] << "Must provide content or URL"
     end
   end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'session#new'
+  root 'subs#index'
 
   resources :users do
     resources :subs, only: [:new]

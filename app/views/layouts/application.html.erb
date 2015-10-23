@@ -8,16 +8,15 @@
 </head>
 <body>
   <% if logged_in? %>
-    <p>welcome, <%= current_user.email %>!</p>
-    <p>
+    welcome, <%= current_user.email %>!
       <form action="<%= session_url %>" method="POST">
         <%= auth_token %>
         <input type="hidden" name="_method" value="DELETE">
         <button value="submit">log out</button>
       </form>
-    </p>
   <% else %>
-    <a href="<%= new_session_url %>">Log in</a>
+    <a href="<%= new_session_url %>">Log in</a> |
+    <a href="<%= new_user_url %>">Sign up</a> |
   <% end %>
 <a href="<%= subs_url %>">All Subs!</a>
 <hr>

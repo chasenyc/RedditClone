@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
 
+  before_action :user_is_author, only: [:edit, :update]
+  before_action :user_is_authorized, only: [:destroy]
+
   def new
     @post = Post.new
   end
@@ -36,6 +39,21 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to sub_url(@post.sub_id)
+  end
+
+  def user_is_author
+    @post = Post.find(params[:id])
+    unless current_user.id == @post.user_id
+      redirect_to sub_url(@post.sub_id)
+    end
+  end
+
+  def user_is_authorized
+    @post = Post.find(params[:id])
+    unless current_user.id == @post.user_id ||
+           current_user.id == @post.sub.moderator.id
+      redirect_to post_url(@post.id)
+    end
   end
 
   private

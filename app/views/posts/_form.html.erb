@@ -1,7 +1,15 @@
+<% sub_id ||= 0 %>
 <form action="<%= url %>" method="POST">
   <input type="hidden" value="<%= method %>" name="_method">
-  <input type="hidden" value="<%= sub_id %>" name="post[sub_id]">
   <%= auth_token %>
+
+    <% Sub.all.each do |sub| %>
+        <label><%= sub.title %>
+          <input type="checkbox" name="post[sub_ids][]" id="<%= sub.id %>"
+                 <%= "checked" if sub_id == sub.id %>>
+        </label>
+    <% end %>
+
   <p>
     <label>Title:
       <input type="text" name="post[title]" value="<%= post.title %>">

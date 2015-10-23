@@ -38,13 +38,13 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to sub_url(@post.sub_id)
+    redirect_to subs_url
   end
 
   def user_is_author
     @post = Post.find(params[:id])
     unless current_user.id == @post.user_id
-      redirect_to sub_url(@post.sub_id)
+      redirect_to subs_url
     end
   end
 
@@ -59,7 +59,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :url, :sub_id)
+    params.require(:post).permit(:title, :content, :url, sub_ids: [])
   end
 
 end

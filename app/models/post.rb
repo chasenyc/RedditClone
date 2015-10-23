@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  validates :title, :sub_id, :user_id, presence: true
+  validates :title, :user_id, presence: true
   validate :content_or_url
   validate :sub_exists
   validate :user_exists
@@ -22,8 +22,8 @@ class Post < ActiveRecord::Base
   end
 
   def sub_exists
-    unless Sub.find(sub_id)
-      self.errors[:sub_id] << "Sub id must be valid!"
+    unless subs.size > 0
+      self.errors[:sub_id] << "Must have one sub!"
     end
   end
 

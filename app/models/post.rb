@@ -15,6 +15,8 @@ class Post < ActiveRecord::Base
     through: :post_subs,
     source: :sub
 
+  has_many :comments
+
   def content_or_url
     if url.empty? && content.empty?
       self.errors[:content] << "Must provide content or URL"

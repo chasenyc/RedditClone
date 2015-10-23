@@ -1,0 +1,13 @@
+<p>
+  <%= comment.content %>
+</p>
+- <%= comment.author.email %>
+
+<%= render "comments/comment", url: comments_url, parent_comment_id: comment.id,
+  post_id: post_id, comment: comment %>
+
+<ul>
+<% Comment.where(parent_comment_id: comment.id).each do |subcomment| %>
+  <%= render 'show', comment: subcomment, post_id: post_id %>
+<% end %>
+</ul>

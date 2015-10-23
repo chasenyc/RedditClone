@@ -14,3 +14,15 @@
   </form>
 </p>
 <% end %>
+<p>
+  Comments:
+</p>
+
+<%= render "comments/comment", url: comments_url, parent_comment_id: nil,
+    post_id: @post.id, comment: @comment %>
+<% Comment.where(post_id: @post.id).where(parent_comment_id: nil).each do |comment| %>
+  <p>
+    <%= comment.content %><br>
+    <a href="<%= comment_url(comment.id) %>">View Thread</a>
+  </p>
+<% end %>

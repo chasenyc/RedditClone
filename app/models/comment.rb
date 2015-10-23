@@ -10,6 +10,16 @@ class Comment < ActiveRecord::Base
 
   belongs_to :post
 
+  has_many :child_comments,
+    class_name: "Comment",
+    foreign_key: :parent_comment_id,
+    primary_key: :id
+
+  def top_level_parent
+    return self if parent_comment_id == nil
+    Comment.find(self.parent_comment_id).top_level_parent
+  end
+
   def ensure_user_exists
     unless User.find(user_id)
       comment.errors[:user_id] << "User id must be valid!"

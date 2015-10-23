@@ -1,0 +1,7 @@
+<a href="<%= @post.url %>"><h2> <%= @post.title %> </h2></a>
+<p>
+  <%= @post.content %>
+</p>
+<p>
+  <a href="<%= sub_url(@post.sub_id) %>">Back to <%= @post.sub.title %> sub</a>
+</p>

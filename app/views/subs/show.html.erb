@@ -1,0 +1,18 @@
+<h1>Welcome to the <%= @sub.title %> sub!</h1>
+
+<% if current_user.id == @sub.user_id %>
+<p>
+  <a href="<%= edit_sub_url(@sub) %>">Edit</a>
+</p>
+<% end %>
+<p>
+  <%= @sub.description %>
+</p>
+<p>
+  <a href="<%= new_sub_post_url(@sub.id) %>">New post</a>
+</p>
+<% @sub.posts.each do |post| %>
+<p>
+  <li><a href=" <%= post_url(post.id) %>"><%= post.title %></a></li>
+</p>
+<% end %>

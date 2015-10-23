@@ -1,0 +1,19 @@
+<form action="<%= url %>" method="POST">
+  <input type="hidden" value="<%= method %>" name="_method">
+  <%= auth_token %>
+  <p>
+    <label>Title:
+      <input type="text" name="sub[title]" value="<%= sub.title %>">
+    </label>
+  </p>
+
+  <p>
+    <label>Description:
+      <textarea name="sub[description]"><%= sub.description %></textarea>
+    </label>
+  </p>
+
+  <p>
+    <button value="submit">Submit</button>
+  </p>
+</form>

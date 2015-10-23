@@ -1,0 +1,26 @@
+<form action="<%= url %>" method="POST">
+  <input type="hidden" value="<%= method %>" name="_method">
+  <input type="hidden" value="<%= sub_id %>" name="post[sub_id]">
+  <%= auth_token %>
+  <p>
+    <label>Title:
+      <input type="text" name="post[title]" value="<%= post.title %>">
+    </label>
+  </p>
+
+  <p>
+    <label>URL:
+      <input type="text" name="post[url]" value="<%= post.url %>">
+    </label>
+  </p>
+
+  <p>
+    <label>Content:
+      <textarea name="post[content]"><%= post.content %></textarea>
+    </label>
+  </p>
+
+  <p>
+    <button value="submit">Submit</button>
+  </p>
+</form>

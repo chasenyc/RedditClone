@@ -1,7 +1,20 @@
 Rails.application.routes.draw do
 
-  resources :users
+  root 'session#new'
+
+  resources :users do
+    resources :subs, only: [:new]
+  end
+
+  resources :subs, only: [:index, :create, :edit, :update, :show] do
+    resources :posts, only: [:new]
+  end
+
+  resources :posts, only: [:create, :edit, :update, :show, :destroy]
+
   resource  :session, only: [:new, :create, :destroy]
+
+end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -57,4 +70,3 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end

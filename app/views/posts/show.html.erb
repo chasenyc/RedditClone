@@ -2,18 +2,15 @@
 <p>
   <%= @post.content %>
 </p>
-<% if current_user.id == @post.user_id ||
-      current_user.id == @post.sub.moderator.id %>
+<% if current_user.id == @post.user_id %>
+<p>
+  <a href="<%= edit_post_url(@post.id) %>">Edit post</a>
+</p>
 <p>
   <form action="<%= post_url(@post.id) %>" method="POST">
     <input type="hidden" value="DELETE" name="_method">
     <%= auth_token %>
     <button value="submit">Delete</button>
   </form>
-</p>
-<% end %>
-<% if current_user.id == @post.user_id %>
-<p>
-  <a href="<%= edit_post_url(@post.id) %>">Edit post</a>
 </p>
 <% end %>

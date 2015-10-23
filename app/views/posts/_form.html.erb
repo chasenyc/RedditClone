@@ -4,9 +4,11 @@
   <%= auth_token %>
 
     <% Sub.all.each do |sub| %>
+    <input type="hidden" name="post[sub_ids][]" value="">
         <label><%= sub.title %>
-          <input type="checkbox" name="post[sub_ids][]" id="<%= sub.id %>"
-                 <%= "checked" if sub_id == sub.id %>>
+          <input type="checkbox" name="post[sub_ids][]" value="<%= sub.id %>"
+                 <%= "checked" if sub_id == sub.id ||
+                     post.sub_ids.include?(sub.id) %>>
         </label>
     <% end %>
 

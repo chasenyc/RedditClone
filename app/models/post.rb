@@ -4,15 +4,16 @@ class Post < ActiveRecord::Base
   validate :sub_exists
   validate :user_exists
 
-  belongs_to :sub,
-    class_name: 'Sub',
-    foreign_key: :sub_id,
-    primary_key: :id
-
   belongs_to :author,
     class_name: 'User',
     foreign_key: :user_id,
     primary_key: :id
+
+  has_many :post_subs, inverse_of: :post
+
+  has_many :subs,
+    through: :post_subs,
+    source: :sub
 
   def content_or_url
     if url.empty? && content.empty?
